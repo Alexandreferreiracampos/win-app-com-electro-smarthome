@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<heade>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="./src/style.css">
+</heade>
+<body>
+	<div class="navigation">
+		
+		<ul>
+			<li class="list active">
+				<a href="#" onclick="requisicao('200/?rele6')">
+					<span class="lis">Sala</span>
+				</a>
+			</li>
+			<li class="list">
+				<a href="#" onclick="requisicao('200/?rele5')">
+					<span class="lis">sanca</span>
+				</a>
+			</li>
+			<li class="list">
+				<a href="#" onclick="requisicao('100/rele4')">
+					<span class="lis">Quarto</span>
+				</a>
+				
+			</li>
+			<li class="list">
+				<a href="#" onclick="requisicao('106/ventilador')">
+					<span class="lis">Ventilador</span>
+				</a>
+			</li>	
+			
+		</ul>
+		<span id="rangeValue">0</span>
+		<input style="position: relative; top:70px; left: 315px;" type="range" class="range" name="" value="0" min="0" max="10" onchange="rangeSlider(this.value)">
+	</div>
+	
+	
+	<script>
+		function rangeSlider(value){
+			document.getElementById('rangeValue').innerHTML = value;
+			var req = new XMLHttpRequest()
+		    req.open('GET', 'http://192.168.0.100/' + value)
+		    req.send()
+
+		}
+		function requisicao(value){
+			var req = new XMLHttpRequest()
+		    req.open('GET', 'http://192.168.0.' + value)
+		    req.send()
+		}
+		const list = document.querySelectorAll('.list');
+		function activeLink(){
+			list.forEach((item) => 
+			item.classList.remove('active'));
+			this.classList.add('active');
+		}
+		list.forEach((item) =>
+		item.addEventListener('click',activeLink));
+	</script>
+</body>
+</html>
